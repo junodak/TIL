@@ -5,7 +5,9 @@ def seq(N, M, level=0, state=[]):
 
     for i in range(N-level):
         if sample[i-1] != sample[i]:
+        # and state[level-1] < sample[i]:
         # if state is None or sample[i] <= state[0]: continue
+            
             state.append(sample[i])
             sample.pop(i)
             seq(N, M, level + 1, state)
