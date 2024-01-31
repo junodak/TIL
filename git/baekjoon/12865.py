@@ -1,31 +1,25 @@
-def pack(bag, weight, idx=0):
-    for i in range(len(bag)):
-        if bag[i][0] > weight:
+max_value = 0
 
-
+def pack(item, bag, value=0):
+    global max_value
+    for i in range(len(item)):
+        if item[i][0] <= bag:
+            max_value = max(max_value, value+item[i][1])
+            if item[i][0] < bag:
+                pack(item[i+1:], bag-item[i][0], value+item[i][1])
+            
 n, k = map(int, input().split())
-bag = [[0]*2 for _ in range(n)]
+item = [[0]*2 for _ in range(n)]
 
 for i in range(n):
-    bag[i][0], bag[i][1] = map(int, input().split())
+    item[i][0], item[i][1] = map(int, input().split())
 
-bag.sort()
-print(pack(bag))
+item.sort(reverse=True)
+pack(item, k)
+print(max_value)
 
-
-# print(pack(bag, k))
-
-# 4 7   
-# 6 13  0
-# 4 8   0
-# 3 6   0
-# 5 12  0
-    
-# 7
-# 3 6   0
-# 4 8   0
-# 5 12  0
-# 6 13  0
-    
-# 1. 무게별로 정렬, 무게가 같으면 가치가 큰게 먼저
-# 2. 재귀
+# 5 10
+# 4 10
+# 3 20
+# 2 6
+# 1 5
