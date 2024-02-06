@@ -1,35 +1,62 @@
-# n = int(input())
-# i = 1
-# numbers = []
+# import sys
+# input = sys.stdin.readline
 
-# while n != 1:
-#     i += 1
-#     if n % i == 0:
-#         numbers.append(i)
-#         n //= i
-#         i = 1
+# def primes(n):
+#     arr = [0,0] + [1]*(n-1)
+#     lst = [0]
 
-# print(numbers)
+#     for i in range(2, int(n ** 0.5) + 1):
+#         if arr[i]:
+#             for j in range(i*i, n+1, i):
+#                 arr[j] = 0
+    
+#     return [i for i in range(n+1) if arr[i]]
 
-import math
 
-def prime_factors(n):
-    factors = []
-    # 2로 나누어 떨어지는 모든 소인수를 찾음
-    while n % 2 == 0:
-        factors.append(2)
-        n //= 2
-    # 이후 홀수 소수들로 나누어 떨어지는 소인수를 찾음
-    for i in range(3, int(math.sqrt(n)) + 1, 2):
-        while n % i == 0:
-            factors.append(i)
-            n //= i
-    # n이 소수인 경우도 고려
-    if n > 2:
-        factors.append(n)
-    return factors
+# t = int(input())
+# k = list(map(int, input().split()))
+# arr = primes(int(max(k) ** 0.5) + 1)
 
-n = int(input())
-factors = prime_factors(n)
-for factor in factors:
-    print(factor)
+# for i in range(t):
+#     prime = 0
+#     arr2 = []
+#     while k[i]>1 and len(arr):
+#         if k[i] % arr[prime] == 0:
+#             k[i] //= arr[prime]
+#             arr2.append(arr[prime])
+#         else:
+#             prime += 1
+#     if k[i] > 1:
+#         arr2.append(k[i])
+#     print(*arr2)
+
+import sys
+input = sys.stdin.readline
+
+def primes(n):
+    arr = [0,0] + [1]*(n-1)
+    lst = [0]
+
+    for i in range(2, int(n ** 0.5) + 1):
+        if arr[i]:
+            for j in range(i*i, n+1, i):
+                arr[j] = 0
+    
+    return [i for i in range(n+1) if arr[i]]
+
+t = int(input())
+k = list(map(int, input().split()))
+arr = primes(int(max(k) ** 0.5) + 1)
+
+for i in range(t):
+    prime = 0
+    arr2 = []
+    while k[i] > 1 and prime < len(arr):
+        if k[i] % arr[prime] == 0:
+            k[i] //= arr[prime]
+            arr2.append(arr[prime])
+        else:
+            prime += 1
+    if k[i] > 1:
+        arr2.append(k[i])
+    print(*arr2)
