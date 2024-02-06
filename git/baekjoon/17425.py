@@ -98,17 +98,56 @@
     
 # # --------------------------------
 
-def primes(n):
-    arr = [0, 0] + [1]*(n-1)
-    for i in range(2, int(n ** 0.5) + 1):
-        if arr[i]:
-            for j in range(i*i, n+1, i):
-                arr[j] = 0
-    return [i for i in range(2, n + 1) if arr[i]]
+# def primes(n):
+#     arr = [0, 0] + [1]*(n-1)
+#     for i in range(2, int(n ** 0.5) + 1):
+#         if arr[i]:
+#             for j in range(i*i, n+1, i):
+#                 arr[j] = 0
+#     return [i for i in range(2, n + 1) if arr[i]]
 
 
-arr = primes(1000)
-arr2 = [0]*len(arr)
-for i in range(len(arr)):
-    while 
-    arr[i]
+# arr = primes(1000)
+# arr2 = [0]*len(arr)
+# for i in range(len(arr)):
+#     while 
+#     arr[i]
+
+
+# N = 1000001
+# dp = [0]*N
+# for i in range(1, N):
+#     j = i
+#     while i*j < N:
+#         if i==j:
+#             dp[i*j] += i
+#         else:
+#             dp[i*j] += i+j
+#         j += 1
+#     dp[i] += dp[i-1]
+
+# t = int(input())
+# for i in range(t):
+#     n = int(input())
+#     print(dp[n])
+
+n = int(input())
+dp = [0]*(n+1)
+for i in range(1, n+1):
+    j = i
+    while i*j <= n:
+        if i==j:
+            dp[i*j] += i
+        else:
+            dp[i*j] += i+j
+        j += 1
+    dp[i] += dp[i-1]
+
+print(dp[n])
+        
+
+# 1*1 = 1   2*1 = 2   3*1 = 3     4*1 = 4
+# 1*2 = 2   2*2 = 4   3*2 = 6     4*2 = 8
+# 1*3 = 3   2*3 = 6   3*3 = 9     4*3 = 12
+# 1*4 = 4   2*4 = 8   3*4 = 12    4*4 = 16    
+# 1*5 = 5   2*5 = 10  3*5 = 15    4*5 = 20
