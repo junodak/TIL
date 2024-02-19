@@ -1,7 +1,31 @@
-a, b = map(int, input().split())
-print(a/b)
+n = int(input())
+if n==0:
+    print(0)
+    print(0)
+elif n>0:
+    arr = [0,1,1]
+    for i in range(n-1):
+        arr[2] = (arr[0] + arr[1]) % 1000000000
+        arr[0] = arr[1]
+        arr[1] = arr[2]
+    print(1)
+    print(arr[1])
+else:
+    arr = [1,0,1]
+    for i in range(1-n):
+        if arr[0] - arr[1] > 0:
+            arr[2] = (arr[0] - arr[1]) % 1000000000
+        else:
+            arr[2] = (arr[0] - arr[1]) % 1000000000 - 1000000000
+        arr[0] = arr[1]
+        arr[1] = arr[2]
+    if arr[0]>0:
+        print(1)
+        print(arr[0])
+    else:
+        print(-1)
+        print(-arr[0])
 
-# n = int(input())
 # if n == 0:
 #     print(0)
 #     print(0)
