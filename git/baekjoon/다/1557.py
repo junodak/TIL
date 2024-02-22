@@ -5,7 +5,7 @@ def find_not_pow(num):
     return cnt
 
 k = int(input())
-n = int((k*2)**0.5)
+n = int((k*2)**0.5+1)
 arr = [0, 1] + [0]*(n-2)
 for i in range(1, n):
     j = 2*i
@@ -24,9 +24,21 @@ while l < r:
         r = mid - 1
     else:
         r = mid
-
 print(l)
 
+# result = bin_search(1, 2*k)
+# print(result)
+
+# def bin_search(l, r):
+#     mid = (l+r) // 2
+#     a = find_not_pow(mid)
+#     if a < k:
+#         result = bin_search(mid, r)
+#     elif a > k:
+#         result = bin_search(l, mid)
+#     else:
+#         result = mid
+#     return result
 
 # import itertools
 
