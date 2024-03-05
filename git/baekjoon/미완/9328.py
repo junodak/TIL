@@ -1,7 +1,7 @@
-from collections import deque
-import copy
 import sys
 sys.stdin = open('input.txt')
+from collections import deque
+import copy
 
 dt = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
@@ -15,13 +15,32 @@ for _ in range(tc):
         arr[i][1:wi+1] = list(input())
     ky = list(input())
 
-    for i in arr:
-        print(*i)
-    print(ky)
-
-    que = deque
-    que.append((0, 0))
-    arr[0][0] = 1
-    while que:
-        di, dj = que.popleft()
-        for dtx, dty in dt:
+    cnt = 0
+    check_lower = True
+    while check_lower:
+        copy_arr = copy.deepcopy(arr)
+        que = deque()
+        que.append((0, 0))
+        copy_arr[0][0] = 1
+        check_lower = False
+        cnt = 0
+        while que:
+            di, dj = que.popleft()
+            for dtx, dty in dt:
+                dx = di + dtx
+                dy = dj + dty
+                if 0 <= dx < hi and 0 <= dy < wi:
+                    tmp = copy_arr[dx][dy]
+                    if tmp != 1 and tmp !='*':
+                        if tmp == '.':
+                            copy_arr[dx][dy] = 1
+                            que.append((dx, dy))
+                        elif tmp in ky:
+                            copy_arr[dx][dy] = 1
+                            que.append((dx, dy))
+                        elif tmp == '$':
+                            cnt += 1
+                        elif tmp.islower():
+                            ky.append(tmp)
+                            check_lower = True
+    print(cnt)
